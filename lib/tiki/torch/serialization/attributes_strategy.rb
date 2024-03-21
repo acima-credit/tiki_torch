@@ -2,6 +2,7 @@ module Tiki
   module Torch
     module Serialization
       class AttributesStrategy
+        include Logging
 
         class << self
 
@@ -41,7 +42,7 @@ module Tiki
           def get_message_attributes(attributes)
             attributes.each_with_object({}) do |(k,v), hsh|
               if v.data_type.downcase != "string"
-                log_info("Unsupported attribute type: #{v.data_type}")
+                info("Unsupported attribute type: #{v.data_type}")
                 next
               end
               key = k.underscore.to_sym
